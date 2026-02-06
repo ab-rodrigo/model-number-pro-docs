@@ -1,0 +1,849 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="Model Number Pro for OpenCart 3/4 — Tutorial" />
+	<meta name="author" content="Rodrigo Barbosa" />
+	<title>Model Number Pro for OpenCart 4 — Tutorial</title>
+	<link href="https://fonts.cdnfonts.com/css/inter" rel="stylesheet" />
+	<!-- <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png" /> -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+	<link href="https://getbootstrap.com/docs/5.0/assets/css/docs.css" rel="stylesheet" crossorigin="anonymous" />
+
+	<style>
+		:root {
+			--header-height: 80px;
+			--nav-link-font-size: 0.8rem;
+			--main-font-size: 0.95rem;
+		}
+
+		html {
+			scroll-behavior: smooth;
+		}
+
+		body {
+			font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', sans-serif;
+			-webkit-font-smoothing: antialiased;
+			overflow: hidden;
+		}
+
+		main,
+		main.container {
+			font-size: var(--main-font-size) !important;
+			margin: 0;
+		}
+
+		#col-aside {
+			left: 0;
+			font-size: var(--nav-link-font-size);
+		}
+
+		#col-main {
+			right: 0;
+		}
+
+		#col-aside,
+		#col-main {
+			position: absolute;
+			overflow-y: auto;
+			top: var(--header-height);
+			height: calc(100vh - var(--header-height));
+			bottom: 0;
+		}
+
+		section,
+		article {
+			scroll-margin-top: calc(var(--header-height) + 12px);
+		}
+
+		.nav>ul>li.nav-item>a.nav-link,
+		.nav>ul>div>li>a.nav-link,
+		.nav>ul>div>div>li>a.nav-link {
+			padding-left: 40px;
+		}
+
+		.nav>ul>li>a,
+		.offcanvas-dismiss {
+			color: var(--bs-secondary-color) !important;
+			white-space: nowrap;
+		}
+
+		.nav>ul>li>a:hover,
+		.offcanvas-dismiss:hover {
+			font-weight: bold;
+		}
+
+		.nav-link {
+			padding: 0 !important;
+		}
+
+		section {
+			padding-top: 20px;
+		}
+
+		.theme-icon-holder {
+			display: inline-block;
+			width: 32px;
+			height: 32px;
+			padding-top: 4px;
+			font-size: 1rem;
+			text-align: center;
+		}
+
+		#download-btn-sm {
+			display: none;
+		}
+
+		@media (max-width: 576px) {
+			.navbar-brand {
+				font-size: 1rem !important;
+			}
+
+			#download-btn-lg {
+				display: none;
+			}
+
+			#download-btn-sm {
+				display: inline-flex;
+			}
+		}
+
+		@media (min-width: 992px) {
+			.img-fluid {
+				max-width: 50% !important;
+				height: auto;
+			}
+		}
+
+		@media (max-width: 429px) {
+			#navbar-buttons-top {
+				display: none !important;
+			}
+		}
+
+		@media (max-width: 429px) {
+			#navbar-buttons-aside {
+				display: flex !important;
+			}
+		}
+
+		#div-update-msg {
+			font-weight: bold;
+			height: 25px;
+			font-size: medium;
+		}
+
+		.article>ol>li>p {
+			margin-bottom: 0;
+		}
+
+		ol,
+		ul {
+			padding-left: 2rem;
+		}
+
+		.about-nav ul {
+			display: flex;
+			flex-wrap: wrap;
+			gap: .75rem 1rem;
+			list-style: none;
+			padding-left: 0;
+		}
+
+		.about-nav a {
+			text-decoration: none;
+		}
+
+		figure.gallery-example img,
+		.installation-image img {
+			max-width: 100%;
+			height: auto;
+			width: 60% !important;
+		}
+
+		.zoomed-img-overlay {
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: rgba(0, 0, 0, 0.8);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			z-index: 9999;
+			cursor: zoom-out;
+			animation: fadeIn .2s;
+		}
+
+		.zoomed-img-overlay img {
+			max-width: 90vw;
+			max-height: 90vh;
+			box-shadow: 0 0 24px #0008;
+			border-radius: 5px;
+			background: #fff;
+			animation: zoomIn .2s;
+		}
+
+		@keyframes fadeIn {
+			from {
+				opacity: 0;
+			}
+
+			to {
+				opacity: 1;
+			}
+		}
+
+		@keyframes zoomIn {
+			from {
+				transform: scale(0.8);
+			}
+
+			to {
+				transform: scale(1);
+			}
+		}
+
+		.zoomed-img-overlay {
+			position: fixed;
+			inset: 0;
+			background: rgba(0, 0, 0, 0.85);
+			z-index: 9999;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			cursor: zoom-out;
+		}
+
+		.zoomed-img-overlay img {
+			max-width: 90vw;
+			max-height: 90vh;
+			box-shadow: 0 0 24px #000;
+			border-radius: 8px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="row">
+
+			<nav class="navbar navbar-expand-lg fixed-top d-flex flex-column p-0 border-bottom" aria-label="Model Number Pro para OpenCart 4.x">
+				<div class="container-fluid d-flex justify-content-between align-items-center" style="height: var(--header-height)">
+					<div class="d-flex align-items-center justify-content-center">
+						<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Alternar navegação" style="padding: 12px 12px; font-size: 1.2rem; border: 1px solid; border-radius: 0.375rem;">
+							<i class="fa-solid fa-bars" aria-hidden="true"></i>
+						</button>
+						<a class="navbar-brand ms-3" href="#"><strong>Model Number Pro</strong><br />OpenCart 4</a>
+					</div>
+					<div class="d-flex align-items-center gap-2" id="navbar-buttons-top">
+						<button class="darkModeToggle btn btn-outline-secondary px-3" type="button" aria-label="Alternar para modo claro/escuro"><i class="fa-solid fa-moon"></i></button>
+						<div class="dropdown">
+							<button class="btn btn-outline-secondary px-3 dropdown-toggle" type="button" id="langDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+								<i class="fa-solid fa-language"></i>
+							</button>
+							<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="langDropdown">
+								<li><a class="dropdown-item lang-option" data-lang="pt-br" href="../pt-br/index.html">Português</a></li>
+								<li><a class="dropdown-item lang-option" data-lang="en-us" href="../en-us/index.html">English</a></li>
+							</ul>
+						</div>
+						<a class="btn btn-success" id="download-btn-lg" target="_blank" rel="noopener" href="https://www.opencart.com/index.php?route=marketplace/extension&filter_member=Rodrigoabr" role="button">Download</a>
+						<a class="btn btn-success btn-lg" id="download-btn-sm" target="_blank" rel="noopener" href="https://www.opencart.com/index.php?route=marketplace/extension&filter_member=Rodrigoabr" role="button" aria-label="Baixar extensão"><i class="fa-solid fa-download"></i></a>
+					</div>
+				</div>
+			</nav>
+
+			<aside class="col-lg-3 col-xl-2 col-xxl-2 sidebar" id="col-aside">
+				<div class="offcanvas-lg offcanvas-start aside-offcanvas" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+					<div class="offcanvas-header">
+						<h5 class="offcanvas-title" id="offcanvasNavbarLabel">Conteúdo</h5>
+						<button type="button" class="btn-close text-reset d-lg-none offcanvas-dismiss" data-bs-dismiss="offcanvas" aria-label="Fechar"></button>
+					</div>
+					<div class="offcanvas-body">
+						<nav id="nav" class="nav navbar d-flex flex-column align-items-start h-100">
+							<ul class="section-items list-unstyled nav flex-column pb-3">
+								<li class="nav-item section-title">
+									<a class="nav-link scrollto offcanvas-dismiss" href="#section-welcome"><span class="theme-icon-holder me-2"><i class="fa fa-home" aria-hidden="true"></i></span>Boas-vindas</a>
+								</li>
+
+								<li class="nav-item section-title collapsed" data-bs-toggle="collapse" data-bs-target="#about-collapse">
+									<a class="nav-link scrollto" href="#section-about"><span class="theme-icon-holder me-2"><i class="fa fa-info" aria-hidden="true"></i></span>Sobre</a>
+								</li>
+								<div id="about-collapse" class="collapse">
+									<li class="nav-item ps-3"><a class="nav-link offcanvas-dismiss" href="#item-about-overview">Visão geral</a></li>
+									<li class="nav-item ps-3"><a class="nav-link offcanvas-dismiss" href="#item-about-features">Recursos</a></li>
+									<li class="nav-item ps-3"><a class="nav-link offcanvas-dismiss" href="#item-about-requirements">Requisitos</a></li>
+									<li class="nav-item ps-3"><a class="nav-link offcanvas-dismiss" href="#item-about-support">Suporte</a></li>
+									<li class="nav-item ps-3"><a class="nav-link offcanvas-dismiss" href="#item-about-licence">Licença</a></li>
+								</div>
+
+								<li class="nav-item section-title">
+									<a class="nav-link scrollto offcanvas-dismiss" href="#section-structure"><span class="theme-icon-holder me-2"><i class="fa-solid fa-shapes"></i></span>Estrutura do número</a>
+								</li>
+								
+								<li class="nav-item section-title">
+									<a class="nav-link scrollto offcanvas-dismiss" href="#section-installation"><span class="theme-icon-holder me-2"><i class="fa-solid fa-download" aria-hidden="true"></i></span>Instalação</a>
+								</li>
+
+								<li class="nav-item section-title collapsed" data-bs-toggle="collapse" data-bs-target="#settings-collapse">
+									<a class="nav-link scrollto" href="#section-settings"><span class="theme-icon-holder me-2"><i class="fa fa-image" aria-hidden="true"></i></span>Configuração</a>
+								</li>
+								<div id="settings-collapse" class="collapse">
+									<li class="nav-item ps-3"><a class="nav-link offcanvas-dismiss" href="#section-settings">Acesso às Configurações</a></li>
+									<li class="nav-item ps-3"><a class="nav-link offcanvas-dismiss" href="#item-settings-general">Geral</a></li>
+									<li class="nav-item ps-3"><a class="nav-link offcanvas-dismiss" href="#item-settings-side-menu">Menu Lateral</a></li>
+									<li class="nav-item ps-3"><a class="nav-link offcanvas-dismiss" href="#item-settings-prefix-suffix">Prefixo e Sufixo</a></li>
+									<li class="nav-item ps-3"><a class="nav-link offcanvas-dismiss" href="#item-settings-interval">Intervalos Sequenciais</a></li>
+									<li class="nav-item ps-3"><a class="nav-link offcanvas-dismiss" href="#item-settings-template">Modelo (Template)</a></li>
+								</div>
+
+								<li class="nav-item section-title collapsed" data-bs-toggle="collapse" data-bs-target="#api-collapse">
+									<a class="nav-link scrollto" href="#section-api"><span class="theme-icon-holder me-2"><i class="fa fa-gear" aria-hidden="true"></i></span>Integração com API</a>
+								</li>
+								<div id="api-collapse" class="collapse">
+									<li class="nav-item ps-3"><a class="nav-link offcanvas-dismiss" href="#item-api-create-app">Criação do aplicativo</a></li>
+									<li class="nav-item ps-3"><a class="nav-link offcanvas-dismiss" href="#item-api-app-settings">Configuração do aplicativo</a></li>
+									<li class="nav-item ps-3"><a class="nav-link offcanvas-dismiss" href="#item-api-app-token">Token de acesso</a></li>
+								</div>
+
+								<li class="nav-item section-title">
+									<a class="nav-link scrollto offcanvas-dismiss" href="troubleshooting.html"><span class="theme-icon-holder me-2"><i class="fa-solid fa-bug" aria-hidden="true"></i></span>Solução de problemas</a>
+								</li>
+								<li class="nav-item section-title">
+									<a class="nav-link scrollto offcanvas-dismiss" href="#section-coffee"><span class="theme-icon-holder me-2"><i class="fa-solid fa-mug-hot" aria-hidden="true"></i></span>Pague-me um café</a>
+								</li>
+							</ul>
+							<div class="align-items-center gap-2" id="navbar-buttons-aside" style="display: none;">
+								<button class="darkModeToggle btn btn-outline-secondary px-3" type="button" aria-label="Alternar para modo claro/escuro"><i class="fa-solid fa-moon"></i></button>
+								<div class="dropdown">
+									<button class="btn btn-outline-secondary px-3 dropdown-toggle" type="button" id="langDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+										<i class="fa-solid fa-language"></i>
+									</button>
+									<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="langDropdown">
+										<li><a class="dropdown-item lang-option" data-lang="pt-br" href="../pt-br/index.html">Português</a></li>
+										<li><a class="dropdown-item lang-option" data-lang="en-us" href="../en-us/index.html">English</a></li>
+									</ul>
+								</div>
+								<a class="btn btn-success" id="download-btn-lg" target="_blank" rel="noopener" href="https://www.opencart.com/index.php?route=marketplace/extension&filter_member=Rodrigoabr" role="button">Download</a>
+								<a class="btn btn-success btn-lg" id="download-btn-sm" target="_blank" rel="noopener" href="https://www.opencart.com/index.php?route=marketplace/extension&filter_member=Rodrigoabr" role="button" aria-label="Baixar extensão"><i class="fa-solid fa-download"></i></a>
+							</div>
+						</nav>
+					</div>
+				</div>
+			</aside>
+
+			<div class="col-lg-9 col-xl-10 col-xxl-10 d-flex align-content-between flex-wrap justify-content-center" id="col-main">
+				<main role="main" class="container mt-2">
+
+					<article id="section-welcome" class="welcome-section mt-3">
+						<header>
+							<h1>Boas-vindas</h1>
+							<p>Este guia oferece um passo a passo para instalar, integrar, configurar e tirar o máximo proveito do módulo. Esteja você começando agora ou otimizando sua configuração, você está no lugar certo.</p>
+						</header>
+					</article>
+
+					<article id="section-about" class="about-section border-top px-0 py-4">
+						<header>
+							<h1>Sobre</h1>
+						</header>
+
+						<nav aria-label="Links rápidos de Sobre" class="about-nav">
+							<ol>
+								<li><a class="offcanvas-dismiss" href="#item-about-overview">Visão geral</a></li>
+								<li><a class="offcanvas-dismiss" href="#item-about-features">Recursos</a></li>
+								<li><a class="offcanvas-dismiss" href="#item-about-requirements">Requisitos</a></li>
+								<li><a class="offcanvas-dismiss" href="#item-about-support">Suporte</a></li>
+							</ol>
+						</nav>
+
+						<section id="item-about-overview" class="about-section-block">
+							<h2>Visão Geral</h2>
+							<p>
+								O módulo foi desenvolvido para otimizar a gestão de catálogos no OpenCart, 
+								eliminando a necessidade de criar códigos de identificação de forma manual e repetitiva. 
+								Ao automatizar esse processo, a ferramenta assegura a geração de identificadores exclusivos e padronizados para cada item da loja.<br>
+								Através de um sistema inteligente de Templates, a extensão permite configurar regras personalizadas 
+								que garantem a entrega de um número de modelo profissional no momento do cadastro ou edição de produtos existentes. 
+								Com esta solução, você elimina erros humanos e duplicidades, estabelecendo uma estrutura lógica e escalável para o controle do seu inventário.
+							</p>
+						</section>
+
+						<section id="item-about-features" class="about-section-block">
+							<h2>Recursos</h2>
+							<ul>
+								<li><strong>Prefixos e Sufixos Personalizáveis:</strong> Adicione identificadores fixos (como siglas de categorias, marcas ou coleções) para facilitar a organização visual e a segmentação do seu catálogo.</li>
+								<li><strong>Gestão de Intervalos Numéricos:</strong> Defina sequências automáticas e incrementais, garantindo que cada produto possua um código exclusivo e livre de duplicidades.</li>
+								<li><strong>Templates Dinâmicos:</strong> Combine prefixos, sufixos e sequências numéricas para criar padrões de codificação específicos para diferentes tipos de produtos ou departamentos.</li>
+								<li><strong>Preenchimento Automático Inteligente:</strong> Otimize o fluxo de trabalho com a geração automática do código no momento da criação do produto, reduzindo cliques e eliminando falhas manuais.</li>
+								<li><strong>Bloqueio de Edição de Segurança:</strong> Ative a proteção do campo "Modelo" para impedir alterações acidentais. Este recurso trava o campo no formulário do produto, prevenindo erros e mantendo a integridade do seu padrão.</li>
+								<li><strong>Processamento Retroativo:</strong> Padronize itens já cadastrados em sua loja. O módulo permite gerar e aplicar modelos para produtos existentes de forma rápida e segura.</li>
+								<li><strong>Configuração Multiregras:</strong> Crie e gerencie múltiplos templates simultaneamente para atender a todas as necessidades específicas da sua operação.</li>
+								<li><strong>Suporte Multi-idioma:</strong> Interface totalmente traduzida para Português, Inglês, Francês, Espanhol e Italiano.</li>
+							</ul>
+						</section>
+
+						<section id="item-about-requirements" class="about-section-block">
+							<h2>Requisitos</h2>
+							<ul>
+								<li>
+									Permissões de acesso e modificação:
+									<ul>
+										<li><strong>Extensões</strong> > <strong>Instalador</strong></li>
+										<li><strong>Extensões</strong> > <strong>Extensões</strong></li>
+										<li><strong>Catálogo</strong> > <strong>Produtos</strong></li>
+									</ul>
+								</li>
+							</ul>
+						</section>
+
+						<section id="item-about-support" class="about-section-block">
+							<h2>Suporte</h2>
+							<p>Visite a <a href="https://www.opencart.com/index.php?route=marketplace/extension&filter_member=Rodrigoabr" target="_blank" rel="noopener">página da extensão</a> e clique em <strong>Get Support</strong> para obter ajuda e atualizações.</p>
+						</section>
+
+						<section id="item-about-licence" class="about-section-block">
+							<h2>Licença</h2>
+							<p><a href="https://www.gnu.org/" rel="nofollow noopener" target="_blank">GNU General Public License version 3 (GPLv3)</a></p>
+						</section>
+
+					</article>
+
+					<article id="section-structure" class="structure-section border-top px-0 py-4">
+						<header class="mb-4">
+							<h2 class="h3">Estrutura do Número de Modelo</h2>
+							<p class="text-muted">A formação do número é baseada em uma lógica modular, flexível e expansível, dividida em três componentes principais para garantir a rastreabilidade total do item.</p>
+							<div class="alert alert-light border">
+								Exemplo: <strong>ABC-XYZ-0001-ASD-QWE</strong>
+							</div>
+						</header>
+
+						<section class="mb-4">
+							<header class="h5">Prefixos</header>
+							<p>Grupo de elementos localizados antes do elemento sequencial (ex: <code>ABC-XYZ-</code>), servem para a classificação macro e identificação de grupos.</p>
+							<ul class="list-unstyled ms-3">
+								<li><strong>Subdivisão Modular:</strong> Pode ser segmentado em múltiplos blocos, com ou sem separadores internos.</li>
+								<li><strong>Escalabilidade:</strong> Estrutura opcional e ilimitada; adicione quantos blocos forem necessários para o detalhamento.</li>
+								<li><strong>Flexibilidade:</strong> Permite o uso de textos fixos, siglas de departamentos ou composições de datas.</li>
+								<li><strong>Regra de Conexão:</strong> Sempre existirá um separador na transição entre o último bloco do prefixo e o intervalo numérico.</li>
+							</ul>
+						</section>
+
+						<section class="mb-4">
+							<header class="h5">Intervalo Numérico</header>
+							<p>Constitui o núcleo sequencial e obrigatório do código (ex: <code>0001</code>), sendo o elemento responsável por garantir a exclusividade e a ordenação do registro.</p>
+							<ul class="list-unstyled ms-3">
+								<li><strong>Extensão Variável:</strong> O comprimento de caracteres pode ser fixo ou variável conforme a necessidade (ex: <code>001</code> ou <code>00001</code>).</li>
+								<li><strong>Preenchimento de Zeros:</strong> Suporta o preenchimento automático (padding) de zeros à esquerda para manter a padronização visual.</li>
+								<li><strong>Valores Predefinidos:</strong> Permite a configuração de faixas numéricas específicas para diferentes categorias de itens.</li>
+							</ul>
+						</section>
+
+						<section class="mb-4">
+							<header class="h5">Sufixos</header>
+							<p>Grupo de elementos localizados após o elemento sequencial (ex: <code>-ASD-QWE</code>), são utilizados para detalhar atributos específicos, versões ou status.</p>
+							<ul class="list-unstyled ms-3">
+								<li><strong>Padronização:</strong> Segue a mesma lógica de subdivisão e escalabilidade dos prefixos, sendo totalmente opcional.</li>
+								<li><strong>Regra de Conexão:</strong> Assim como nos prefixos, sempre haverá um separador entre o intervalo numérico e o primeiro sufixo.</li>
+							</ul>
+						</section>
+
+						<footer class="mt-5 p-3 bg-body-tertiary rounded border-start border-warning border-4 shadow-sm">
+							<h3 class="h6 mb-2 fw-bold text-body">
+								Atenção: Sensibilidade aos Caracteres e Separadores
+							</h3>
+							<p class="small mb-0 text-body-secondary">
+								O sistema é sensível a separadores. 
+								Uma alteração sutil transforma o código em um registro inteiramente novo. 
+								A substituição de um hífen (-) por uma barra (/) ou qualquer outro símbolo resulta em uma identidade completamente diferente para o sistema. 
+								Observe as distinções abaixo:
+							</p>
+							<table class="table table-border">
+								<tbody>
+									<tr>
+										<td><code class="text-primary-emphasis bg-primary-subtle px-1 rounded">ABC-XYZ-0001-ASD-QWE</code></td>
+										<td>Exemplo</td>
+									</tr>
+									<tr>
+										<td><code class="text-danger-emphasis bg-danger-subtle px-1 rounded">ABC<span class="fw-bold text-decoration-underline">/</span>XYZ-0001-ASD-QWE</code></td>
+										<td>A barra altera a classificação do primeiro bloco de prefixo, criando uma nova identidade.</td>
+									</tr>
+									<tr>
+										<td><code class="text-danger-emphasis bg-danger-subtle px-1 rounded">ABC-XYZ-0001<span class="fw-bold text-decoration-underline">/</span>ASD-QWE</code></td>
+										<td>A barra altera a conexão entre o numeral e o sufixo, criando uma nova identidade.</td>
+									</tr>
+								</tbody>
+
+							</table>
+							<p class="small mb-0 text-body-secondary">A contagem do intervalo numérico é vinculada à combinação única de prefixos, sufixos e separadores. 
+								Ao definir uma nova configuração de identificadores, a sequência numérica será reiniciada automaticamente para aquela identidade específica.</p>
+						</footer>
+
+						<footer class="mt-5 p-3 bg-body-tertiary rounded border-start border-primary border-4 shadow-sm">
+							<h3 class="h6 mb-2 fw-bold text-body">
+								<i class="fa-regular fa-lightbulb"></i> Dica:
+							</h3>
+							<p class="small mb-0 text-body-secondary">
+								Para manter a legibilidade, evite blocos de prefixos e/ou sufixos com muitos caracteres. 
+								Prefira <code class="text-primary-emphasis bg-primary-subtle px-1 rounded">BRA-LOG-0001</code> 
+								em vez de <code class="text-danger-emphasis bg-danger-subtle px-1 rounded">BRASILLOGISTICA-0001</code>.
+							</p>
+						</footer>
+
+					</article>
+
+					<article id="section-installation" class="installation-section border-top px-0 py-4">
+						<header>
+							<h1>Instalação</h1>
+						</header>
+
+						<ol class="installation-steps">
+							<li><strong>Download do Arquivo:</strong> Baixe a extensão diretamente da <a href="https://www.opencart.com/index.php?route=marketplace/extension&filter_member=Rodrigoabr" target="_blank" rel="noopener">página oficial do OpenCart</a> e salve o arquivo em uma pasta de fácil acesso em seu computador.</li>
+							<li><strong>Upload da Extensão:</strong> No painel administrativo da sua loja, acesse o menu <strong>Extensões > Instalador</strong>. Clique no botão Upload, selecione o arquivo baixado e aguarde a barra de progresso indicar a conclusão.</li>
+							<li><strong>Ativação:</strong> Após o upload bem-sucedido, localize o módulo na lista de Extensões Instaladas (na mesma página) e clique no botão Instalar (ícone de "+" verde) para ativá-lo no sistema.</li>
+						</ol>
+					</article>
+
+					<article id="section-settings" class="settings-section border-top px-0 py-4">
+						<header>
+							<h1>Acesso às Configurações</h1>
+						</header>
+						
+						<p>Após concluir a instalação, siga os passos abaixo para acessar a interface de gerenciamento do módulo.</p>
+
+						<ol>
+							<li><strong>Navegação no Menu:</strong> No menu lateral do seu painel administrativo, acesse <strong>Extensões > Extensões</strong>.</li>
+							<li><strong>Filtro de Categoria:</strong> No campo de seleção "Escolha o tipo de extensão", selecione a opção Módulos.</li>
+							<li><strong>Primeiro Acesso (Ativação):</strong> Localize o <strong>Model Number Generator Pro</strong> na lista. Clique no botão Instalar (ícone de "+" verde) para ativar o módulo.</li>
+								<figure>
+									<img src="../assets/images/docs-config-1.png" alt="Ativação do módulo" class="img-fluid shadow rounded" loading="lazy" />
+									<figcaption>Ativação do módulo</figcaption>
+								</figure>
+							<li><strong>Acesso ao Painel:</strong> Clique no botão Editar (ícone de lápis azul) correspondente ao módulo.</li>
+								<figure>
+									<img src="../assets/images/docs-config-2.png" alt="Acesso ao Painel" class="img-fluid shadow rounded" loading="lazy" />
+									<figcaption>Acesso ao Painel</figcaption>
+								</figure>
+						</ol>
+
+						<section id="item-settings-general" class="settings-section-block">
+							<h2>Geral</h2>
+							<figure>
+								<img src="../assets/images/pt-br/docs-config-general-tab-pt-br.png" alt="Aba geral" class="img-fluid shadow rounded" loading="lazy" />
+								<figcaption class="text-muted mt-2">Configuração da aba geral</figcaption>
+							</figure>
+							<table class="table table-bordered table-striped align-middle">
+            					<thead class="table-light">
+									<tr>
+										<th>Parâmetro</th>
+										<th>Descrição</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><strong>Preenchimento automático</strong></td>
+										<td>Habilita o preenchimento automático do campo modelo quando um produto é criado.</td>
+									</tr>
+									<tr>
+										<td><strong>Impedir edição</strong></td>
+										<td>Impede a edição do campo modelo.</td>
+									</tr>
+									<tr>
+										<td><strong>Status</strong></td>
+										<td>Habilita ou desabilita o módulo.</td>
+									</tr>
+								</tbody>
+							</table>
+						</section>
+
+						<section id="item-settings-side-menu" class="settings-section-block">
+							<h2>Menu Lateral</h2>
+							<p>Este menu é comum às configurações de <strong>Prefixo, Intervalo, Sufixo e Modelos</strong>, permitindo incluir ou excluir grupos e configurações.</p>
+
+							<figure class="my-4">
+								<img src="../assets/images/docs-config-5.png" alt="Interface do Menu lateral" class="img-fluid shadow rounded" loading="lazy" style="height: 150px;" />
+								<figcaption class="text-muted mt-2">Menu lateral</figcaption>
+							</figure>
+
+							<div class="table-responsive">
+								<table class="table table-bordered table-striped align-middle">
+									<thead class="table-light">
+										<tr>
+											<th style="width: 150px;">Ação</th>
+											<th>Descrição</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td class="text-center">
+												<img src="../assets/images/docs-config-3.png" alt="Adicionar grupo" class="img-fluid shadow-sm rounded" loading="lazy" style="height: 30px;" />
+											</td>
+											<td>
+												<strong>Adicionar grupo:</strong> Cria um novo grupo de prefixos.
+											</td>
+										</tr>
+										<tr>
+											<td class="text-center">
+												<img src="../assets/images/docs-config-4.png" alt="Excluir grupo" class="img-fluid shadow-sm rounded" loading="lazy" style="height: 30px;" />
+											</td>
+											<td>
+												<strong>Excluir grupo:</strong> Remove permanentemente o grupo.
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</section>
+
+						<section id="item-settings-prefix-suffix" class="settings-section-block">
+							<h2>Prefixo e Sufixo</h2>
+							<p>As abas de <strong>Prefixo</strong> e <strong>Sufixo</strong> possuem funcionamento idêntico, permitindo adicionar elementos de texto ou data que cercam o intervalo sequencial.</p>
+							
+							<div class="row">
+								<div class="col-md-6">
+									<figure class="my-3">
+										<img src="../assets/images/pt-br/docs-config-prefix-tab-pt-br.png" alt="Aba prefixo" class="img-fluid shadow rounded" loading="lazy" />
+										<figcaption class="text-muted small mt-2 text-center">Interface da aba Prefixo</figcaption>
+									</figure>
+								</div>
+								<div class="col-md-6">
+									<figure class="my-3">
+										<img src="../assets/images/pt-br/docs-config-suffix-tab-pt-br.png" alt="Aba sufixo" class="img-fluid shadow rounded" loading="lazy" />
+										<figcaption class="text-muted small mt-2 text-center">Interface da aba Sufixo</figcaption>
+									</figure>
+								</div>
+							</div>
+
+							<div class="table-responsive">
+								<table class="table table-bordered table-striped align-middle">
+									<thead class="table-light">
+										<tr>
+											<th style="width: 200px;">Parâmetro/Ação</th>
+											<th>Descrição</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><strong>Nome</strong></td>
+											<td>Identificação do grupo.<br>
+												<small class="text-muted">Exemplo: Mouse, Teclado, Monitor, Folhas A4.</small>
+											</td>
+										</tr>
+										<tr>
+											<td><strong>Separador (Grupo)</strong></td>
+											<td>Define o caractere que dividirá este grupo do intervalo sequencial.</td>
+										</tr>
+										<tr>
+											<td><strong>Tipo</strong></td>
+											<td>Define a natureza do elemento. Escolha entre <code>Texto</code> (estático) ou <code>Data</code> (dinâmico).</td>
+										</tr>
+										<tr>
+											<td><strong>Texto</strong></td>
+											<td>Conteúdo textual fixo (disponível apenas se o tipo for <code>Texto</code>).</td>
+										</tr>
+										<tr>
+											<td><strong>Padrão</strong></td>
+											<td>Formatação da data (disponível apenas se o tipo for <code>Data</code>).</td>
+										</tr>
+										<tr>
+											<td><strong>Separador (Elemento)</strong></td>
+											<td>
+												Define o separador entre elementos internos do grupo.
+												<div class="alert alert-light border-0 p-0 mb-0 small">
+													<strong>Nota:</strong> Em listas unitárias ou no último item, este separador é substituído pelo <strong>separador do grupo</strong>.
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td class="text-center">
+												<img src="../assets/images/docs-config-6.png" alt="Ícone Adicionar" class="img-fluid shadow-sm rounded" loading="lazy" style="height: 30px;" />
+											</td>
+											<td>Adiciona um novo elemento ao grupo (texto ou data).</td>
+										</tr>
+										<tr>
+											<td class="text-center">
+												<img src="../assets/images/docs-config-7.png" alt="Ícone Excluir" class="img-fluid shadow-sm rounded" loading="lazy" style="height: 30px;" />
+											</td>
+											<td>Exclui o elemento selecionado do grupo.</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</section>
+
+						<section id="item-settings-interval" class="settings-section-block">
+							<h2>Intervalo Numérico Sequencial</h2>
+							<figure>
+								<img src="../assets/images/pt-br/docs-config-interval-tab-pt-br.png" alt="Aba prefixo" class="img-fluid shadow rounded" loading="lazy" />
+								<figcaption>Configuração da aba intervalos</figcaption>
+							</figure>
+
+							<table class="table table-bordered table-striped">
+								<thead class="table-light">
+									<tr>
+										<th>Parâmetro/Ação</th>
+										<th>Descrição</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><strong>Nome</strong></td>
+										<td>Identificação do intervalo sequencial.<br>
+											<small class="text-muted">Exemplo: Mouse, Teclado, Monitor, Folhas A4.</small>
+										</td>
+									</tr>
+									<tr>
+										<td><strong>Zeros à esquerda</strong></td>
+										<td>Habilita o preenchimento automático de zeros à esquerda para manter a padronização visual dos números.</td>
+									</tr>
+									<tr>
+										<td><strong>Comprimento</strong></td>
+										<td>Define o número total de dígitos da sequência após o preenchimento dos zeros.<br>
+											<small class="text-muted">Exemplo: Com comprimento 4, o número 1 torna-se "0001".</small>
+										</td>
+									</tr>
+									<tr>
+										<td><strong>Faixa - Mínimo</strong></td>
+										<td>Valor numérico inicial para o início da contagem do intervalo.</td>
+									</tr>
+									<tr>
+										<td><strong>Faixa - Máximo</strong></td>
+										<td>Valor limite que a sequência pode atingir.</td>
+									</tr>
+								</tbody>
+							</table>
+						</section>
+
+						<section id="item-settings-template" class="settings-section-block">
+							<h2>Modelo (Template)</h2>
+							<figure>
+								<img src="../assets/images/pt-br/docs-config-template-tab-pt-br.png" alt="Aba sufixo" class="img-fluid shadow rounded" loading="lazy" />
+								<figcaption>Configuração da aba template</figcaption>
+							</figure>
+
+							<table class="table table-bordered table-striped">
+								<thead class="table-light">
+									<tr>
+										<th>Parâmetro/Ação</th>
+										<th>Descrição</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><strong>Nome</strong></td>
+										<td>Identificação descritiva do modelo (template).<br>
+											<small class="text-muted">Exemplo: Etiquetas Patrimoniais, Controle de Insumos A4.</small>
+										</td>
+									</tr>
+									<tr>
+										<td><strong>Prefixo</strong></td>
+										<td>Selecione o grupo de <strong>Prefixo</strong> previamente configurado para compor o início do identificador.</td>
+									</tr>
+									<tr>
+										<td><strong>Intervalo</strong></td>
+										<td>Selecione a regra de <strong>Intervalo Sequencial</strong> que definirá a numeração deste modelo.</td>
+									</tr>
+									<tr>
+										<td><strong>Sufixo</strong></td>
+										<td>Selecione o grupo de <strong>Sufixo</strong> previamente configurado para compor o final do identificador.</td>
+									</tr>
+									<tr>
+										<td><strong>Padrão</strong></td>
+										<td>Define este modelo como a opção principal para autopreenchimento em novos produtos.</td>
+									</tr>
+								</tbody>
+							</table>
+						</section>
+					</article>
+
+
+					<article class="article px-0 py-4 border-top" id="section-coffee">
+						<header>
+							<h1>Pague-me um café</h1>
+							<p>
+								<a href="https://www.paypal.com/donate/?hosted_button_id=SPQH2B32XBJUW" target="_blank" rel="noopener">
+									<img src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" alt="Botão Doar com PayPal" title="PayPal - A forma mais segura e fácil de pagar online!" />
+								</a>
+							</p>
+						</header>
+					</article>
+				</main>
+
+				<footer class="footer">
+					<div class="container text-center pt-5">
+						<small class="copyright">Copyright <i class="fa-regular fa-copyright" aria-hidden="true"></i>
+							<script>document.write(new Date().getFullYear());</script>
+							— <a class="theme-link" href="https://www.opencart.com/index.php?route=marketplace/extension&filter_member=Rodrigoabr" target="_blank" rel="noopener">Extensão Instagram Gallery para OpenCart</a>
+						</small>
+					</div>
+					<div class="d-flex justify-content-center">
+						<span class="pb-1" style="font-size: 0.75rem;">Última atualização:
+							<script>document.write(document.lastModified)</script>
+						</span>
+					</div>
+				</footer>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		document.addEventListener('click', function (e) {
+			const link = e.target.closest('.offcanvas-dismiss');
+			if (!link) return;
+			const ocEl = document.getElementById('offcanvasNavbar');
+			if (!ocEl) return;
+			if (window.bootstrap && bootstrap.Offcanvas) {
+				const oc = bootstrap.Offcanvas.getOrCreateInstance(ocEl);
+				oc.hide();
+			}
+		});
+
+		(function () {
+			const toggle = document.getElementsByClassName('darkModeToggle');
+			if (!toggle) return;
+
+			Array.from(toggle).forEach(btn => {
+				const html = document.documentElement;
+				const saved = localStorage.getItem('bs-theme');
+				const setMode = (mode) => {
+					html.setAttribute('data-bs-theme', mode);
+					localStorage.setItem('bs-theme', mode);
+					btn.innerHTML = mode === 'dark' ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+					btn.setAttribute('aria-label', mode === 'dark' ? 'Alternar para modo claro' : 'Alternar para modo escuro');
+				};
+				setMode(saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+				btn.addEventListener('click', () => setMode(html.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark'));
+			});
+		})();
+
+		document.addEventListener('DOMContentLoaded', function () {
+			document.querySelectorAll('img').forEach(function (img) {
+				img.style.cursor = 'zoom-in';
+				img.addEventListener('click', function (e) {
+					if (document.querySelector('.zoomed-img-overlay')) return;
+					const overlay = document.createElement('div');
+					overlay.className = 'zoomed-img-overlay';
+					overlay.tabIndex = 0;
+					const zoomedImg = document.createElement('img');
+					zoomedImg.src = img.src;
+					zoomedImg.alt = img.alt || '';
+					overlay.appendChild(zoomedImg);
+					overlay.addEventListener('click', function () {
+						overlay.remove();
+					});
+					overlay.addEventListener('keydown', function (ev) {
+						if (ev.key === 'Escape') overlay.remove();
+					});
+					document.body.appendChild(overlay);
+					overlay.focus();
+				});
+			});
+		});
+	</script>
+	<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+
+</html>
