@@ -1,137 +1,68 @@
-<!doctype html>
-<html lang="en">
-
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-	<meta name="description" content="Instagram Gallery for OpenCart 3/4 — Tutorial" />
-	<meta name="author" content="Rodrigo Barbosa" />
-	<title>Instagram Gallery for OpenCart 3/4 — Tutorial</title>
-	<link href="https://fonts.cdnfonts.com/css/inter" rel="stylesheet" />
-	<!-- <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png" /> -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
-	<link href="https://getbootstrap.com/docs/5.0/assets/css/docs.css" rel="stylesheet" crossorigin="anonymous" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Number Pro - Redirecting...</title>
+    
+	<link rel="alternate" hreflang="pt-br" href="./pt-br/index.html" />
+	<link rel="alternate" hreflang="pt-pt" href="./pt-pt/index.html" />
+	<link rel="alternate" hreflang="en-us" href="./en-us/index.html" />
+	<link rel="alternate" hreflang="en-gb" href="./en-gb/index.html" />
+	<link rel="alternate" hreflang="it-it" href="./it-it/index.html" />
+	<link rel="alternate" hreflang="fr-fr" href="./fr-fr/index.html" />
+	<link rel="alternate" hreflang="es-es" href="./es-es/index.html" />
+
+	<link rel="alternate" hreflang="x-default" href="./en-gb/index.html" />
+
+<script>
+    (function() {
+        const savedLang = localStorage.getItem('user-manual-lang');
+        
+        if (savedLang) {
+            window.location.replace(savedLang);
+            return;
+        }
+
+        const browserLang = (navigator.language || navigator.userLanguage).toLowerCase();
+        
+        let target = './en-gb/index.html';
+
+        if (browserLang.startsWith('pt-br')) {
+            target = './pt-br/index.html';
+        } else if (browserLang.startsWith('pt')) {
+            target = './pt-pt/index.html';
+        } else if (browserLang.startsWith('en-gb')) {
+            target = './en-gb/index.html';
+        } else if (browserLang.startsWith('it')) {
+            target = './it-it/index.html';
+        } else if (browserLang.startsWith('fr')) {
+            target = './fr-fr/index.html';
+        } else if (browserLang.startsWith('es')) {
+            target = './es-es/index.html';
+        } else if (browserLang.startsWith('en')) {
+            target = './en-us/index.html';
+        }
+
+        window.location.replace(target);
+    })();
+</script>
+
+<noscript>
+    <meta http-equiv="refresh" content="0; url=./en-us/index.html">
+    <style>body { font-family: sans-serif; text-align: center; padding: 50px; }</style>
+    <p>Please select your language / Selecione seu idioma:</p>
+    <div class="lang-links">
+        <a href="./en-us/index.html">English (US)</a> | 
+        <a href="./en-gb/index.html">English (UK)</a> | 
+        <a href="./pt-br/index.html">Português (BR)</a> | 
+        <a href="./pt-pt/index.html">Português (PT)</a> | 
+        <a href="./it-it/index.html">Italiano</a> | 
+        <a href="./fr-fr/index.html">Français</a> | 
+        <a href="./es-es/index.html">Español</a>
+    </div>
+</noscript>
 </head>
-<style>
-	:root {
-		--header-height: 80px;
-		--nav-link-font-size: 0.8rem;
-		--main-font-size: 0.98rem;
-	}
-
-	html {
-		scroll-behavior: smooth;
-	}
-
-	body {
-		font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', sans-serif;
-		-webkit-font-smoothing: antialiased;
-		margin: 0;
-		padding: 0;
-		min-height: 100vh;
-		background: #f8fafc;
-	}
-
-	main,
-	main.container {
-		font-size: var(--main-font-size) !important;
-		margin: 0;
-	}
-
-	.image-size {
-		min-width: 220px;
-		width: 100%;
-		max-width: 420px;
-	}
-
-	h1, .h1 {
-		font-weight: 800;
-		font-size: 2.2rem;
-		letter-spacing: -1px;
-		margin-bottom: 1.2rem;
-		color: #222;
-	}
-
-	.btn-doc {
-		background: #fff;
-		border: 2px solid #e3e3e3;
-		transition: all 0.2s;
-		box-shadow: 0 2px 8px 0 rgba(0,0,0,0.04);
-	}
-	.btn-doc:hover, .btn-doc:focus {
-		background: #f1f3f7;
-		border-color: #bdbdbd;
-		transform: translateY(-2px) scale(1.03);
-	}
-
-	.sticky-footer {
-		margin-top: auto;
-		background: #f8fafc;
-		border-top: 1px solid #ececec;
-	}
-
-	@media (max-width: 768px) {
-		.image-size {
-			max-width: 90vw;
-			min-width: 180px;
-		}
-		.h1, h1 {
-			font-size: 1.8rem;
-		}
-	}
-
-	@media (max-width: 576px) {
-		.h1, h1 {
-			font-size: 1.8rem;
-		}
-	}
-
-	h1, p, a {
-		text-wrap: balance;
-	}
-</style>
-
-<body>
-	<div class="min-vh-100 d-flex flex-column">
-		<div id="lng-pt" class="flex-grow-1 align-items-center justify-content-center">
-			<div class="container py-5">
-				<div class="row justify-content-center">
-					<div class="col-lg-7 col-md-10 col-12 text-center p-4 p-md-5">
-						<span class="h1 d-block mb-1">Instagram Gallery Extension</span>
-						<span class="h1 d-block mb-4">OpenCart 3 / 4</span>
-						<span class="h3 d-block mb-1">Tutorial</span>
-						<div class="row justify-content-center mb-4">
-							<div class="col-12 col-md-6 mb-3 mb-md-0">
-								<a href="pt-br/index.html" class="btn btn-doc w-100 px-4 py-2 d-flex align-items-center justify-content-center rounded-pill">
-									<img src="https://flagcdn.com/br.svg" width="32" alt="Brasil">
-									<span class="fw-bold ps-2">Português</span>
-								</a>
-							</div>
-							<div class="col-12 col-md-6">
-								<a href="en-us/index.html" class="btn btn-doc w-100 px-4 py-2 d-flex align-items-center justify-content-center rounded-pill">
-									<img src="https://flagcdn.com/us.svg" width="32" alt="USA">
-									<span class="fw-bold ps-2">English</span>
-								</a>
-							</div>
-						</div>
-						<img class="image-size img-fluid my-3" src="assets/images/devices.png" alt="Dispositivos">
-					</div>
-				</div>
-			</div>
-		</div>
-		<footer class="footer sticky-footer py-3">
-			<div class="container text-center">
-				<small class="copyright">
-					Copyright <i class="fa-regular fa-copyright" aria-hidden="true"></i>
-					<script>document.write(new Date().getFullYear());</script>
-					<br>
-					<a class="theme-link" href="https://www.opencart.com/index.php?route=marketplace/extension&filter_member=Rodrigoabr" target="_blank" rel="noopener">Instagram Gallery Extension for OpenCart</a>
-				</small>
-			</div>
-		</footer>
-	</div>
-	<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<body style="background: #121212;">
 </body>
-
 </html>
