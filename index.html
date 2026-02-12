@@ -5,64 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Model Number Pro - Redirecting...</title>
     
-	<link rel="alternate" hreflang="pt-br" href="./pt-br/index.html" />
-	<link rel="alternate" hreflang="pt-pt" href="./pt-pt/index.html" />
-	<link rel="alternate" hreflang="en-us" href="./en-us/index.html" />
-	<link rel="alternate" hreflang="en-gb" href="./en-gb/index.html" />
-	<link rel="alternate" hreflang="it-it" href="./it-it/index.html" />
-	<link rel="alternate" hreflang="fr-fr" href="./fr-fr/index.html" />
-	<link rel="alternate" hreflang="es-es" href="./es-es/index.html" />
+    <link rel="alternate" hreflang="pt-br" href="./pt-br/index.html" />
+    <link rel="alternate" hreflang="pt-pt" href="./pt-pt/index.html" />
+    <link rel="alternate" hreflang="en-us" href="./en-us/index.html" />
+    <link rel="alternate" hreflang="en-gb" href="./en-gb/index.html" />
+    <link rel="alternate" hreflang="it-it" href="./it-it/index.html" />
+    <link rel="alternate" hreflang="fr-fr" href="./fr-fr/index.html" />
+    <link rel="alternate" hreflang="es-es" href="./es-es/index.html" />
+    <link rel="alternate" hreflang="x-default" href="./en-gb/index.html" />
 
-	<link rel="alternate" hreflang="x-default" href="./en-gb/index.html" />
+    <script>
+        (function() {
+            // 1. Tenta recuperar preferência salva
+            const savedLang = localStorage.getItem('user-manual-lang');
+            if (savedLang && savedLang.includes('index.html')) {
+                window.location.replace(savedLang);
+                return;
+            }
 
-<script>
-    (function() {
-        const savedLang = localStorage.getItem('user-manual-lang');
-        
-        if (savedLang) {
-            window.location.replace(savedLang);
-            return;
-        }
+            // 2. Detecta idioma do navegador
+            const browserLang = (navigator.language || navigator.userLanguage).toLowerCase();
+            let target = './en-gb/index.html'; // Default (UK)
 
-        const browserLang = (navigator.language || navigator.userLanguage).toLowerCase();
-        
-        let target = './en-gb/index.html';
+            // 3. Mapeamento de idiomas
+            if (browserLang.includes('pt-br')) {
+                target = './pt-br/index.html';
+            } else if (browserLang.startsWith('pt')) {
+                target = './pt-pt/index.html';
+            } else if (browserLang.includes('en-gb')) {
+                target = './en-gb/index.html';
+            } else if (browserLang.startsWith('it')) {
+                target = './it-it/index.html';
+            } else if (browserLang.startsWith('fr')) {
+                target = './fr-fr/index.html';
+            } else if (browserLang.startsWith('es')) {
+                target = './es-es/index.html';
+            } else if (browserLang.startsWith('en')) {
+                target = './en-us/index.html';
+            }
 
-        if (browserLang.startsWith('pt-br')) {
-            target = './pt-br/index.html';
-        } else if (browserLang.startsWith('pt')) {
-            target = './pt-pt/index.html';
-        } else if (browserLang.startsWith('en-gb')) {
-            target = './en-gb/index.html';
-        } else if (browserLang.startsWith('it')) {
-            target = './it-it/index.html';
-        } else if (browserLang.startsWith('fr')) {
-            target = './fr-fr/index.html';
-        } else if (browserLang.startsWith('es')) {
-            target = './es-es/index.html';
-        } else if (browserLang.startsWith('en')) {
-            target = './en-us/index.html';
-        }
+            // 4. Executa o redirecionamento
+            window.location.replace(target);
+        })();
+    </script>
 
-        window.location.replace(target);
-    })();
-</script>
-
-<noscript>
-    <meta http-equiv="refresh" content="0; url=./en-us/index.html">
-    <style>body { font-family: sans-serif; text-align: center; padding: 50px; }</style>
-    <p>Please select your language / Selecione seu idioma:</p>
-    <div class="lang-links">
-        <a href="./en-us/index.html">English (US)</a> | 
-        <a href="./en-gb/index.html">English (UK)</a> | 
-        <a href="./pt-br/index.html">Português (BR)</a> | 
-        <a href="./pt-pt/index.html">Português (PT)</a> | 
-        <a href="./it-it/index.html">Italiano</a> | 
-        <a href="./fr-fr/index.html">Français</a> | 
-        <a href="./es-es/index.html">Español</a>
-    </div>
-</noscript>
+    <noscript>
+        <meta http-equiv="refresh" content="2; url=./en-gb/index.html">
+        <style>
+            body { font-family: system-ui, -apple-system, sans-serif; background: #121212; color: white; text-align: center; padding: 50px; }
+            a { color: #0d6efd; text-decoration: none; font-weight: bold; }
+            .lang-links { margin-top: 20px; line-height: 2; }
+        </style>
+        <p>Please select your language / Selecione seu idioma:</p>
+        <div class="lang-links">
+            <a href="./en-us/index.html">English (US)</a><br>
+            <a href="./en-gb/index.html">English (UK)</a><br>
+            <a href="./pt-br/index.html">Português (BR)</a><br>
+            <a href="./pt-pt/index.html">Português (PT)</a><br>
+            <a href="./it-it/index.html">Italiano</a><br>
+            <a href="./fr-fr/index.html">Français</a><br>
+            <a href="./es-es/index.html">Español</a>
+        </div>
+    </noscript>
 </head>
 <body style="background: #121212;">
-</body>
+    </body>
 </html>
