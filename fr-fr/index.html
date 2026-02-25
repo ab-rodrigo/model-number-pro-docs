@@ -63,8 +63,8 @@
 				</div>
 			</nav>
 
-			<aside class="col-lg-3 col-xl-2 sidebar" id="col-aside">
-				<div class="offcanvas-lg offcanvas-start border-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+			<aside class="col-lg-3 col-xl-2 sidebar border-end pe-0" id="col-aside">
+				<div class="offcanvas-lg offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
 					<div class="offcanvas-header bg-body-tertiary">
 						<h5 class="offcanvas-title fw-bold" id="offcanvasNavbarLabel">Documentation</h5>
 						<button type="button" class="btn-close offcanvas-dismiss" data-bs-dismiss="offcanvas" aria-label="Fermer"></button>
@@ -193,6 +193,65 @@
 								</div>
 							</div>
 						</div>
+
+                        <div class="row mt-5">
+                            <div class="col-12">
+                                <div class="card shadow-sm border-secondary-subtle">
+                                    <div class="card-header bg-body-tertiary py-3">
+                                        <h3 class="h5 fw-bold mb-0 text-center"><i class="fa-solid fa-layer-group text-primary me-2"></i>Comparaison des Versions</h3>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover align-middle mb-0 table-striped">
+                                            <thead class="table-light small text-uppercase">
+                                                <tr>
+                                                    <th class="ps-4" style="width: 40%;"></th>
+                                                    <th class="text-center" style="width: 30%;">Gratuit</th>
+                                                    <th class="text-center bg-primary bg-opacity-10 text-primary" style="width: 30%;">Pro</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="text-body-secondary">
+                                                <tr>
+                                                    <td class="ps-4 fw-medium text-body">Verrouiller le champ Modèle</td>
+                                                    <td class="text-center small"><i class="fa-solid fa-circle-xmark text-danger me-1"></i></td>
+                                                    <td class="text-center fw-bold bg-primary bg-opacity-10 text-primary"><i class="fa-solid fa-circle-check text-success me-1"></i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="ps-4 fw-medium text-body">Modèles (Templates)</td>
+                                                    <td class="text-center small">Seulement 1</td>
+                                                    <td class="text-center fw-bold bg-primary bg-opacity-10 text-primary">Illimités</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="ps-4 fw-medium text-body">Intervalles Numériques</td>
+                                                    <td class="text-center small">Seulement 1</td>
+                                                    <td class="text-center fw-bold bg-primary bg-opacity-10 text-primary">Illimités</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="ps-4 fw-medium text-body">Préfixes</td>
+                                                    <td class="text-center small"><i class="fa-solid fa-circle-xmark text-danger me-1"></i></td>
+                                                    <td class="text-center fw-bold bg-primary bg-opacity-10 text-primary">Illimités</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="ps-4 fw-medium text-body">Suffixes</td>
+                                                    <td class="text-center small"><i class="fa-solid fa-circle-xmark text-danger me-1"></i></td>
+                                                    <td class="text-center fw-bold bg-primary bg-opacity-10 text-primary">Illimités</td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="2"></td>
+                                                    <td class="bg-primary bg-opacity-10 p-3 text-center border-top">
+                                                        <a href="https://www.opencart.com/index.php?route=marketplace/extension&filter_member=Rodrigoabr" target="_blank" class="btn btn-primary btn-sm fw-bold w-100 shadow-sm">
+                                                            <i class="fa-solid fa-crown me-2 text-warning"></i>Passer à la version Pro
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
 					</section>
 
 					<section id="item-about-features" class="mb-5">
@@ -538,7 +597,7 @@
                                             </thead>
                                             <tbody class="small">
                                                 <tr><td><strong>Remplissage auto</strong></td><td class="text-body-secondary">Génère instantanément le modèle lors de la création de produits.</td></tr>
-                                                <tr><td><strong>Empêcher l'édition</strong></td><td class="text-body-secondary">Verrouille le champ pour empêcher toute modification manuelle.</td></tr>
+                                                <tr><td><strong>Empêcher l'édition</strong></td><td class="text-body-secondary">Verrouille le champ <strong>Modèle</strong> pour éviter les modifications manuelles.</td></tr>
                                                 <tr><td><strong>État</strong></td><td class="text-body-secondary">Active ou désactive le module.</td></tr>
                                             </tbody>
                                         </table>
