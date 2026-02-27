@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+
     <title>Model Number Generator - Redirecting...</title>
     
     <link rel="alternate" hreflang="pt-br" href="./pt-br/index.html" />
@@ -16,18 +21,17 @@
 
     <script>
         (function() {
-            // 1. Tenta recuperar preferência salva
+            const bust = "?t=" + new Date().getTime();
+
             const savedLang = localStorage.getItem('user-manual-lang');
             if (savedLang && savedLang.includes('index.html')) {
-                window.location.replace(savedLang);
+                window.location.replace(savedLang + bust);
                 return;
             }
 
-            // 2. Detecta idioma do navegador
             const browserLang = (navigator.language || navigator.userLanguage).toLowerCase();
-            let target = './en-gb/index.html'; // Default (UK)
+            let target = './en-gb/index.html';
 
-            // 3. Mapeamento de idiomas
             if (browserLang.includes('pt-br')) {
                 target = './pt-br/index.html';
             } else if (browserLang.startsWith('pt')) {
@@ -44,8 +48,7 @@
                 target = './en-us/index.html';
             }
 
-            // 4. Executa o redirecionamento
-            window.location.replace(target);
+            window.location.replace(target + bust);
         })();
     </script>
 
